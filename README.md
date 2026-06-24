@@ -8,6 +8,9 @@ Hands-on Labs, Challenge Labs, and personal notes created during the **AZ-900T00
 
 Learn how to host a static website using Azure Storage and Blob Containers.
 
+### Lab 02 - Organize and Protect Resources with Tags and Locks
+
+Use Azure Tags for resource organization and Azure Locks to prevent accidental modifications or deletions.
 ---
 
 ## Repository Structure
@@ -15,7 +18,7 @@ Learn how to host a static website using Azure Storage and Blob Containers.
 ```text
 ├── Labs/
 │ ├── 01-Deploy-a-Static-Website-with-Azure-Blob-Storage.md
-│ └──  02-Organize-and-Protect-Resources-with-Tags-and-Locks.md
+│ └── 02-Organize-and-Protect-Resources-with-Tags-and-Locks.md
 ├── Screenshots/
 |   └── Lab01/
 └── README.md
