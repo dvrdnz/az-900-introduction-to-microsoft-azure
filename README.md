@@ -14,7 +14,8 @@ Learn how to host a static website using Azure Storage and Blob Containers.
 
 ```text
 ├── Labs/
-│   └── Lab01-Static-Website.md
+│ ├── 01-Deploy-a-Static-Website-with-Azure-Blob-Storage.md
+│ └──  02-Organize-and-Protect-Resources-with-Tags-and-Locks.md
 ├── Screenshots/
 |   └── Lab01/
 └── README.md
