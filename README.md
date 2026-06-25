@@ -11,6 +11,11 @@ Learn how to host a static website using Azure Storage and Blob Containers.
 ### Lab 02 - Organize and Protect Resources with Tags and Locks
 
 Use Azure Tags for resource organization and Azure Locks to prevent accidental modifications or deletions.
+
+### Lab 03 - Build a Simple Website Endpoint with Azure Functions
+
+Create and deploy a serverless endpoint using Azure Functions.
+
 ---
 
 ## Repository Structure
@@ -18,9 +23,9 @@ Use Azure Tags for resource organization and Azure Locks to prevent accidental m
 ```text
 ├── Labs/
 │ ├── 01-Deploy-a-Static-Website-with-Azure-Blob-Storage.md
-│ └── 02-Organize-and-Protect-Resources-with-Tags-and-Locks.md
+│ ├── 02-Organize-and-Protect-Resources-with-Tags-and-Locks.md
+│ └── 03-Build-a-Simple-Website-Endpoint-with-Azure-Functions.md
 ├── Screenshots/
-|   └── Lab01/
 └── README.md
 ```
 
