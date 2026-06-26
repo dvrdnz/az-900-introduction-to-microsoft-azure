@@ -2,7 +2,7 @@
 
 ## Overview
 
-Deploy a serverless HTTP endpoint using Azure Functions, monitor its activity with Application Insights, and secure access using function keys.
+Deploy a serverless HTTP endpoint using Azure Functions, monitor its execution with Application Insights, and secure access using function keys.
 
 ---
 
@@ -10,67 +10,65 @@ Deploy a serverless HTTP endpoint using Azure Functions, monitor its activity wi
 
 * Azure Subscription
 * Resource Group
-* Required permissions to create Azure resources
+* Permissions to create Azure resources
 
 ---
 
 ## Create a Resource Group
 
-A Resource Group is a logical container used to organize and manage Azure resources.
+A Resource Group is a logical container used to organize and manage related Azure resources.
 
 1. Navigate to **Resource Groups**.
 2. Select **+ Create**.
 3. Enter a resource group name.
-4. Select a region.
-5. Select **Review + Create**.
-6. Select **Create**.
+4. Choose a region.
+5. Select **Review + Create**, then **Create**.
 
 ---
 
-## Configure the Function App
+## Create the Function App
 
-Azure Functions provides a serverless compute platform that executes code on demand. The Flex Consumption plan charges only for actual execution time.
+Azure Functions is a serverless compute service that runs code on demand. The Flex Consumption plan charges only for actual execution.
 
 1. Navigate to **Function App**.
 2. Select **+ Create**.
-3. Select **Flex Consumption** as the hosting option and choose **Select**.
-4. On the **Basics** tab, select the resource group created earlier.
-5. Enter a **Function App name**.
-6. Leave **Secure unique default host name** enabled.
-7. Select a region.
-8. Choose **Node.js** as the **Runtime stack**.
-9. Choose **22 LTS** as the **Version**.
-10. Set **2048 MB** as the **Instance Size**.
-11. Open the **Monitoring** tab.
-12. Confirm that **Application Insights** is enabled.
-13. Select **Review + Create**, then **Create**.
-14. Leave **Zone Redundancy** disabled.
+3. Select **Flex Consumption** and choose **Select**.
+4. On the **Basics** tab:
+
+   * Select the previously created Resource Group.
+   * Enter a unique **Function App name**.
+   * Keep **Secure unique default host name** enabled.
+   * Select a region.
+   * Set **Runtime stack** to **Node.js**.
+   * Set **Version** to **22 LTS**.
+   * Set **Instance Size** to **2048 MB**.
+5. Open the **Monitoring** tab and verify that **Application Insights** is enabled.
+6. Select **Review + Create**, then **Create**.
+7. Leave **Zone Redundancy** disabled.
 
 ---
 
 ## Verify the Deployment
 
-Confirm that the Function App deployed successfully.
-
-1. When deployment completes, select **Go to resource**.
+1. After deployment completes, select **Go to resource**.
 2. Verify that the Function App status is **Running**.
 
 ![WebApp](/Screenshots/img_01.png)
 
-3. In the left-hand menu, under **Monitoring**, select **Application Insights**.
-4. Confirm that Application Insights is enabled and connected to a resource.
+3. Under **Monitoring**, open **Application Insights**.
+4. Confirm that it is enabled and linked to the Function App.
 
 ![ApplicationInsights](/Screenshots/img_02.png)
 
 ---
 
-## Open Cloud Shell
+## Open Azure Cloud Shell
 
-Launch Azure Cloud Shell to create and deploy a function from the command line.
+Azure Cloud Shell provides a browser-based command-line environment with Azure CLI and Azure Functions Core Tools preinstalled.
 
-1. Select the **Cloud Shell** icon in the top toolbar.
-2. If prompted, select **Bash**.
-3. If Cloud Shell requires storage, select **Create storage** and wait for initialization.
+1. Select the **Cloud Shell** icon.
+2. Choose **Bash** if prompted.
+3. If required, select **Create storage** and wait for initialization.
 
 ![MOUNT\_STORAGE-1](/Screenshots/img_03.png)
 
@@ -80,15 +78,13 @@ Launch Azure Cloud Shell to create and deploy a function from the command line.
 
 ## Create the Function Project
 
-Use Azure Functions Core Tools to create a new HTTP-triggered function.
-
-1. Create a project folder and switch to it:
+1. Create a project directory:
 
 ```bash
 mkdir func-gp-endpoint && cd func-gp-endpoint
 ```
 
-2. Initialize a new Functions project:
+2. Initialize a new Azure Functions project:
 
 ```bash
 func init --worker-runtime node --language javascript --model V4
@@ -100,7 +96,7 @@ func init --worker-runtime node --language javascript --model V4
 func new --name GetStatus --template "HTTP trigger" --authlevel anonymous
 ```
 
-> The `anonymous` authorization level allows public access without authentication. This is useful for testing but should not be used for sensitive workloads.
+> **Note:** The `anonymous` authorization level allows unrestricted access and should only be used for testing.
 
 4. Verify the function was created:
 
@@ -116,9 +112,7 @@ GetStatus.js
 
 ---
 
-## Deploy the Function to Azure
-
-Publish the project to the Function App.
+## Deploy the Function
 
 1. Store the Function App name in a variable:
 
@@ -127,13 +121,13 @@ FUNC_APP_NAME=$(az functionapp list --resource-group rg-gp-functions-endpoint --
 echo $FUNC_APP_NAME
 ```
 
-2. Deploy the function:
+2. Publish the function:
 
 ```bash
 func azure functionapp publish $FUNC_APP_NAME
 ```
 
-3. Wait for deployment to complete.
+3. Wait for the deployment to complete.
 
 Example output:
 
@@ -153,30 +147,25 @@ Expected response:
 Hello, world!
 ```
 
-5. Copy the URL and test it in a private browser window.
-
-Verify that the endpoint responds without requiring authentication.
+5. Open the URL in a private browser window and verify that it is publicly accessible.
 
 ---
 
-## Verify the Function in the Azure Portal
+## Verify the Function
 
-Confirm that the deployed function appears in the Function App.
-
-1. Navigate to the Function App.
-2. Open the Function App created earlier.
-3. On the **Overview** page, verify that **GetStatus** appears under **Functions** with an **HTTP Trigger**.
+1. Open the Function App in the Azure portal.
+2. On the **Overview** page, verify that **GetStatus** appears under **Functions** with an **HTTP Trigger**.
 
 ![GetStatus\_HTTP](/Screenshots/img_06.png)
 
 ---
 
-## Restrict Access to the Function
+## Restrict Function Access
 
-Change the authorization level so requests require a function key.
+Change the authorization level to require a function key.
 
 1. Open **Cloud Shell**.
-2. Navigate to the project folder:
+2. Navigate to the project directory:
 
 ```bash
 cd ~/func-gp-endpoint
@@ -207,27 +196,22 @@ FUNC_APP_NAME=$(az functionapp list --resource-group rg-gp-functions-endpoint --
 func azure functionapp publish $FUNC_APP_NAME
 ```
 
-6. Wait for deployment to complete.
-
 ---
 
-## Test Restricted Access
+## Verify Restricted Access
 
-Verify that unauthenticated requests are blocked.
-
-1. Refresh the function URL in your browser.
-2. Confirm that a **401 Unauthorized** response is returned.
-3. In the Azure portal, navigate to the Function App.
-4. Select **GetStatus**.
-5. Open **Function Keys**.
-6. Copy the default key.
-7. Append the key to the URL:
+1. Refresh the Function URL.
+2. Confirm that the response is **401 Unauthorized**.
+3. In the Azure portal, open **GetStatus**.
+4. Select **Function Keys**.
+5. Copy the default key.
+6. Append the key to the URL:
 
 ```text
 https://<function-app>.azurewebsites.net/api/getstatus?code=<function-key>
 ```
 
-8. Open the URL.
+7. Open the updated URL.
 
 Expected response:
 
@@ -237,22 +221,18 @@ Hello, world!
 
 ---
 
-## Review Invocation Logs
+## Review Application Insights
 
-Use Application Insights to review function telemetry.
-
-1. Navigate to **Application Insights**.
-2. Open the resource connected to your Function App.
-3. Under **Investigate**, select **Search**.
-4. Select **See all data in the last 24 hours**.
+1. Open the connected **Application Insights** resource.
+2. Under **Investigate**, select **Search**.
+3. Select **See all data in the last 24 hours**.
 
 ![Monitoring](/Screenshots/img_07.png)
 
-5. Review successful requests with status code **200**.
-6. Select an entry to view details such as duration, timestamp, and status code.
-7. Under **Monitoring**, select **Logs**.
-8. Switch from **Simple Mode** to **KQL Mode**.
-9. Run the following query:
+4. Review successful requests with status code **200**.
+5. Open **Logs** under **Monitoring**.
+6. Switch to **KQL Mode**.
+7. Execute the following query:
 
 ```kusto
 requests
@@ -261,29 +241,25 @@ requests
 
 ![QueryResults](/Screenshots/img_08.png)
 
+Review timestamps, response codes, execution duration, and request details.
+
 ---
 
 ## Clean Up
 
 ### Delete the Resource Group
 
-Deleting the Resource Group removes the Function App and associated resources.
-
 1. Navigate to **Resource Groups**.
 2. Select **rg-gp-functions-endpoint**.
 3. Select **Delete resource group**.
-4. Enter the resource group name for confirmation.
-5. Select **Delete**.
-6. Wait for the deletion to complete.
+4. Enter the resource group name.
+5. Select **Delete** and wait for completion.
 
 ### Remove Cloud Shell Files
 
 Delete the local project files stored in Cloud Shell.
 
-1. Open **Cloud Shell**.
-2. Run:
-
 ```bash
-cd ~ && rm -rf func-gp-endpoint
+cd ~
+rm -rf func-gp-endpoint
 ```
-
