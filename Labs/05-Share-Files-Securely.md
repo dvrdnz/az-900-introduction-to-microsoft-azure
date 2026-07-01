@@ -45,7 +45,6 @@ A Resource Group is a logical container used to organize and manage related Azur
 5. Select **Review + Create**.
 6. Select **Create**.
 
-<!-- keep existing image -->
 
 ## Create a Storage Account
 
@@ -61,8 +60,6 @@ A Storage Account provides access to Azure Storage services such as Blob Storage
 8. Select **Review + Create**.
 9. Select **Create**.
 
-<!-- keep existing image -->
-
 ---
 
 # Create a Private Container
@@ -75,8 +72,6 @@ Create a private Blob container to prevent anonymous access.
 4. Enter a container name.
 5. Leave **Anonymous access level** set to **Private (no anonymous access)**.
 6. Select **Create**.
-
-<!-- keep existing image -->
 
 ---
 
@@ -101,7 +96,6 @@ Upload the file:
 4. Select **Upload**.
 5. Verify that the file appears in the container.
 
-<!-- keep existing image -->
 
 ---
 
@@ -126,7 +120,6 @@ A stored access policy centralizes SAS permissions and expiration, making access
 
 6. Select **Save**.
 
-<!-- keep existing image -->
 
 ---
 
@@ -146,7 +139,6 @@ Generate a Shared Access Signature (SAS) based on the stored access policy.
 5. Select **Generate SAS token and URL**.
 6. Copy the **Blob SAS URL**.
 
-<!-- keep existing image -->
 
 ---
 
@@ -159,7 +151,6 @@ Verify that the blob cannot be accessed without authentication.
 3. Paste the URL into the address bar.
 4. Confirm that access is denied.
 
-<!-- keep existing image -->
 
 ---
 
@@ -173,7 +164,6 @@ Verify that the SAS URL grants temporary access.
 
 The SAS token provides temporary access without requiring the user to sign in.
 
-<!-- keep existing image -->
 
 ---
 
@@ -186,7 +176,6 @@ Delete the stored access policy to invalidate all SAS tokens associated with it.
 3. Delete `partner-read-policy`.
 4. Select **Save**.
 
-<!-- keep existing image -->
 
 ## Verify SAS Revocation
 
@@ -210,8 +199,6 @@ The request should return an authentication error similar to:
 >
 > See [Microsoft Learn – Define a stored access policy](https://learn.microsoft.com/en-us/rest/api/storageservices/define-stored-access-policy).
 
-
-<!-- keep existing image -->
 
 ---
 
@@ -253,7 +240,6 @@ Revoking a SAS prevents access to a file, but the blob remains in storage. Lifec
 
 Verify that the rule appears in the lifecycle management list.
 
-<!-- keep existing image -->
 
 ## Review the Rule
 
@@ -263,7 +249,6 @@ Open the `delete-shared-files` rule and verify:
 * Files older than **30 days** are selected.
 * The configured action is **Delete the blob**.
 
-<!-- keep existing image -->
 
 ---
 
@@ -280,7 +265,6 @@ Deleting the resource group removes every Azure resource created during this lab
 5. Select **Delete** twice to confirm.
 6. Wait until the deletion is complete.
 
-<!-- keep existing image -->
 
 ## Clean Up Local Artifacts
 
