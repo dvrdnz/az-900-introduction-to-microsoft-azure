@@ -20,6 +20,10 @@ Create and deploy a serverless endpoint using Azure Functions.
 
 Manage identities and permissions using Microsoft Entra ID and Azure Role-Based Access Control.
 
+### Lab 05 - Share Files Securely
+
+Configure Azure Storage services to securely share files.
+
 ---
 
 ## Repository Structure
@@ -29,7 +33,8 @@ Manage identities and permissions using Microsoft Entra ID and Azure Role-Based 
 │ ├── 01-Deploy-a-Static-Website-with-Azure-Blob-Storage.md
 │ ├── 02-Organize-and-Protect-Resources-with-Tags-and-Locks.md
 | ├── 03-Build-a-Simple-Website-Endpoint-with-Azure-Functions.md
-│ └── 04-Set-Up-New-Employee-Access-Entra-ID-and-RBAC.md
+| ├── 04-Set-Up-New-Employee-Access-Entra-ID-and-RBAC.md
+│ └── 05-Share-Files-Securely.md
 ├── Screenshots/
 └── README.md
 ```
