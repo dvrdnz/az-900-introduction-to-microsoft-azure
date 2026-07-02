@@ -24,6 +24,10 @@ Manage identities and permissions using Microsoft Entra ID and Azure Role-Based 
 
 Configure Azure Storage services to securely share files.
 
+### Lab 06 - Set Up Cost Guardrails in Azure
+
+Use Azure Cost Management tools such as Budgets and Alerts to monitor spending.
+
 ---
 
 ## Repository Structure
@@ -34,7 +38,8 @@ Configure Azure Storage services to securely share files.
 │ ├── 02-Organize-and-Protect-Resources-with-Tags-and-Locks.md
 | ├── 03-Build-a-Simple-Website-Endpoint-with-Azure-Functions.md
 | ├── 04-Set-Up-New-Employee-Access-Entra-ID-and-RBAC.md
-│ └── 05-Share-Files-Securely.md
+│ ├── 05-Share-Files-Securely.md
+│ └── 06-Set-Up-Cost-Guardrails-in-Azure.md
 ├── Screenshots/
 └── README.md
 ```
