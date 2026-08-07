@@ -4,6 +4,10 @@ Hands-on Labs, Challenge Labs, and personal notes created during the **AZ-900T00
 
 These labs are delivered through [Skillable](https://www.skillable.com), a third-party platform hosting Microsoft's proprietary AZ-900 lab content. Labs 01–06 below were completed and documented. **Lab 07** could not be completed: a platform policy misconfiguration blocked the required resource creation, and the issue was never resolved by Skillable. The diagnosis is documented under [Findings](#findings).
 
+## Status
+
+This repository is archived. Labs 01–06 are complete; Lab 07 remains unresolved due to an unfixed platform-side policy bug (see Findings). No further labs will be added.
+
 ## Course Labs
 
 ### Lab 01 - Deploy a Static Website with Azure Blob Storage
